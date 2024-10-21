@@ -4,7 +4,7 @@ import becker.robots.*;
  * CS1A - Assignment 3 - "The Maze" <br>
  * Quarter: <br>
  * TODO: THE SUMMARY GOES HERE <br>
- * 
+ *
  * @author student's full name 1
  * @author student's full name 2
  * @author student's full name 3
@@ -32,7 +32,7 @@ class MazeBot extends RobotSE
      */
     public void moveBot()
     {
-       this.botPutThing();
+        this.botPutThing();
         this.move();
         this.botPutThing();
         totalMoves++;
@@ -49,7 +49,7 @@ class MazeBot extends RobotSE
         {
             movesWest++;
         }
-        
+
     }
 
     // TODO: You must override the putThing method here.
@@ -84,22 +84,25 @@ class MazeBot extends RobotSE
     // OTHER METHODS LIKE isAtEndSpot, ETC)
     public void navigateMaze()
     {
-       
-       while(!isAtEndSpot()) {
-          this.turnRight();
-          if(this.frontIsClear()) {
-             this.moveBot();
-          }
-          
-          else {
-             this.turnLeft();
-             this.moveBot();
-          }
-          
-          
-          
+
+        while(!isAtEndSpot()) {
+            this.turnRight();
+            if(this.frontIsClear()) {
+                this.moveBot();
+            }
+
+            else {
+                while(!this.frontIsClear()){
+                    this.turnLeft();
+                }
+
+                this.moveBot();
+            }
+
+
+
+        }
     }
-  }
 }
 
 // ###################################################################################################
@@ -171,18 +174,18 @@ public class Maze extends Object
             int stChange = 0;
             switch (facing)
             {
-            case EAST:
-                stChange = -1;
-                break;
-            case NORTH:
-                aveChange = -1;
-                break;
-            case WEST:
-                stChange = 1;
-                break;
-            case SOUTH:
-                aveChange = 1;
-                break;
+                case EAST:
+                    stChange = -1;
+                    break;
+                case NORTH:
+                    aveChange = -1;
+                    break;
+                case WEST:
+                    stChange = 1;
+                    break;
+                case SOUTH:
+                    aveChange = 1;
+                    break;
             }
 
             while (spacesLeft > 0)
@@ -198,20 +201,20 @@ public class Maze extends Object
 
             switch (facing)
             {
-            case EAST:
-                facing = Direction.NORTH;
-                break;
-            case NORTH:
-                facing = Direction.WEST;
-                size--;
-                break;
-            case WEST:
-                facing = Direction.SOUTH;
-                break;
-            case SOUTH:
-                facing = Direction.EAST;
-                size--;
-                break;
+                case EAST:
+                    facing = Direction.NORTH;
+                    break;
+                case NORTH:
+                    facing = Direction.WEST;
+                    size--;
+                    break;
+                case WEST:
+                    facing = Direction.SOUTH;
+                    break;
+                case SOUTH:
+                    facing = Direction.EAST;
+                    size--;
+                    break;
             }
         }
     }
@@ -227,7 +230,7 @@ public class Maze extends Object
         Maze.makeMaze(calgary);
 
         calgary.showThingCounts(true); // This will help you see if you incorrectly put more than 1 thing down in any
-                                       // intersections
+        // intersections
 
         //don.navigateMaze(); // <-- HERE'S WHERE THE NavigateMaze() method is
         // called. NO NEED TO TOUCH AT ALL
