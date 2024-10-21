@@ -93,11 +93,11 @@ class MazeBot extends RobotSE
           
           else {
              this.turnLeft();
-          }
-          
-          if(this.frontIsClear()) {
              this.moveBot();
           }
+          
+          
+          
     }
   }
 }
