@@ -32,7 +32,9 @@ class MazeBot extends RobotSE
      */
     public void moveBot()
     {
+       this.botPutThing();
         this.move();
+        this.botPutThing();
         totalMoves++;
         if (this.getDirection() == Direction.EAST)
         {
@@ -47,6 +49,7 @@ class MazeBot extends RobotSE
         {
             movesWest++;
         }
+        
     }
 
     // TODO: You must override the putThing method here.
@@ -81,22 +84,22 @@ class MazeBot extends RobotSE
     // OTHER METHODS LIKE isAtEndSpot, ETC)
     public void navigateMaze()
     {
-        // While your robot hasn't yet reached the 'end spot', keep navigating
-        // through the Maze and doing its thing
-        while (!isAtEndSpot())
-        {
-            // TODO: The robot will navigate the maze until it reaches the end spot.
-            // What will you have the robot do at each step?
-            this.moveBot();
-            this.botPutThing();
-        }
-
-        // TODO: After completing Maze, print total number of spaces moved and how
-        // many times robot moved East, South, West, North.
-        printEverything();
-
+       
+       while(!isAtEndSpot()) {
+          this.turnRight();
+          if(this.frontIsClear()) {
+             this.moveBot();
+          }
+          
+          else {
+             this.turnLeft();
+          }
+          
+          if(this.frontIsClear()) {
+             this.moveBot();
+          }
     }
-
+  }
 }
 
 // ###################################################################################################
@@ -226,8 +229,9 @@ public class Maze extends Object
         calgary.showThingCounts(true); // This will help you see if you incorrectly put more than 1 thing down in any
                                        // intersections
 
-        don.navigateMaze(); // <-- HERE'S WHERE THE NavigateMaze() method is
+        //don.navigateMaze(); // <-- HERE'S WHERE THE NavigateMaze() method is
         // called. NO NEED TO TOUCH AT ALL
-        don.printEverything();
+        //don.printEverything();
+        don.navigateMaze();
     }
 }
