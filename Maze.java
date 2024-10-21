@@ -1,13 +1,12 @@
 import becker.robots.*;
 
 /**
- * CS1A - Assignment 3 - "The Maze" <br>
- * Quarter: <br>
- * TODO: THE SUMMARY GOES HERE <br>
+ * CS1A - Assignment 3 - "The Maze" <br> Quarter: Fall 2024 <br>
+ * TODO: THE SUMMARY GOES HERE
+ * This robot follows the right wall while dropping items everytime it moves and recording its steps until it escapes the maze and finally outputs its movement data <br>
  *
- * @author student's full name 1
- * @author student's full name 2
- * @author student's full name 3
+ * @author Leo Ismail
+ * @author Dalton Langely
  */
 class MazeBot extends RobotSE
 {
@@ -34,7 +33,6 @@ class MazeBot extends RobotSE
     {
         this.botPutThing();
         this.move();
-        this.botPutThing();
         totalMoves++;
         if (this.getDirection() == Direction.EAST)
         {
@@ -53,8 +51,10 @@ class MazeBot extends RobotSE
     }
 
     // TODO: You must override the putThing method here.
-    public void botPutThing(){
-        if(this.countThingsInBackpack()!=0){
+    public void botPutThing()
+    {
+        if (this.countThingsInBackpack() != 0)
+        {
             this.putThing();
         }
     }
@@ -62,11 +62,11 @@ class MazeBot extends RobotSE
     public void printEverything()// Or printTotalNumberOfSpacesMoved(),
     // whichever you decide
     {
-        System.out.println("Total number of spaces moved: "+totalMoves);
-        System.out.println("Total number of westward movements: "+movesWest);
-        System.out.println("Total number of eastward movements: "+movesEast);
-        System.out.println("Total number of northward movements: "+movesNorth);
-        System.out.println("Total number of southward movements: "+movesSouth);
+        System.out.println("Total number of spaces moved: " + totalMoves);
+        System.out.println("Total number of westward movements: " + movesWest);
+        System.out.println("Total number of eastward movements: " + movesEast);
+        System.out.println("Total number of northward movements: " + movesNorth);
+        System.out.println("Total number of southward movements: " + movesSouth);
         System.out.println("Hooray! don has solved the maze.");
     }
 
@@ -85,25 +85,22 @@ class MazeBot extends RobotSE
     // OTHER METHODS LIKE isAtEndSpot, ETC)
     public void navigateMaze()
     {
-
-        while(!isAtEndSpot()) {
+        while (!isAtEndSpot())
+        {
             this.turnRight();
-            if(this.frontIsClear()) {
+            if (this.frontIsClear())
+            {
                 this.moveBot();
-            }
-
-            else {
-                while(!this.frontIsClear()){
+            } else
+            {
+                while (!this.frontIsClear())
+                {
                     this.turnLeft();
                 }
 
                 this.moveBot();
             }
-
-
-
         }
-        
         this.printEverything();
     }
 }
@@ -177,18 +174,18 @@ public class Maze extends Object
             int stChange = 0;
             switch (facing)
             {
-                case EAST:
-                    stChange = -1;
-                    break;
-                case NORTH:
-                    aveChange = -1;
-                    break;
-                case WEST:
-                    stChange = 1;
-                    break;
-                case SOUTH:
-                    aveChange = 1;
-                    break;
+            case EAST:
+                stChange = -1;
+                break;
+            case NORTH:
+                aveChange = -1;
+                break;
+            case WEST:
+                stChange = 1;
+                break;
+            case SOUTH:
+                aveChange = 1;
+                break;
             }
 
             while (spacesLeft > 0)
@@ -204,20 +201,20 @@ public class Maze extends Object
 
             switch (facing)
             {
-                case EAST:
-                    facing = Direction.NORTH;
-                    break;
-                case NORTH:
-                    facing = Direction.WEST;
-                    size--;
-                    break;
-                case WEST:
-                    facing = Direction.SOUTH;
-                    break;
-                case SOUTH:
-                    facing = Direction.EAST;
-                    size--;
-                    break;
+            case EAST:
+                facing = Direction.NORTH;
+                break;
+            case NORTH:
+                facing = Direction.WEST;
+                size--;
+                break;
+            case WEST:
+                facing = Direction.SOUTH;
+                break;
+            case SOUTH:
+                facing = Direction.EAST;
+                size--;
+                break;
             }
         }
     }
@@ -228,17 +225,16 @@ public class Maze extends Object
     public static void main(String[] args)
     {
         City calgary = new City(12, 12);
-        MazeBot don = new MazeBot(calgary, 1, 1, Direction.EAST, 1000); // TODO: <-- YOU WILL NEED TO CHANGE THIS FROM ZERO
+        MazeBot don = new MazeBot(calgary, 1, 1, Direction.EAST,
+                1000); // TODO: <-- YOU WILL NEED TO CHANGE THIS FROM ZERO
 
         Maze.makeMaze(calgary);
 
         calgary.showThingCounts(true); // This will help you see if you incorrectly put more than 1 thing down in any
         // intersections
 
-        //don.navigateMaze(); // <-- HERE'S WHERE THE NavigateMaze() method is
+        don.navigateMaze(); // <-- HERE'S WHERE THE NavigateMaze() method is
         // called. NO NEED TO TOUCH AT ALL
-        //don.printEverything();
-        don.navigateMaze();
         don.printEverything();
     }
 }
