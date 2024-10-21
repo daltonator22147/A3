@@ -1,17 +1,27 @@
 import becker.robots.*;
 
 /**
- * CS1A - Assignment 3 - "The Maze" <br> Quarter: Fall 2024 <br>
- * TODO: THE SUMMARY GOES HERE
- * This robot follows the right wall while dropping items everytime it moves and recording its steps until it escapes the maze and finally outputs its movement data <br>
- *
+ * CS1A - Assignment 3 - "The Maze" <br>
+ * Quarter: Fall 2024 <br>
+ * This robot follows the right wall while dropping items everytime it moves. As it moves it records its steps and where
+ * it faces as it moves until it escapes the maze and finally outputs its movement data. <br>
+ * moveBot function: The moveBot function first checks if there is already a thing it can pick up. If theres nothing to pick
+ * up it wont drop a thing, otherwise it will drop a thing. Then it moves, records that it has moved a space and finally
+ * checks which direction its facing and increase one of the direction values by 1 depending on which direction its
+ * facing.
+ * botPutThing function: This function first checks if the bot has any things in his backpack. If he does he drops them,
+ * otherwise the function ends.
+ * printEverything function: This function prints all the data of the bots movement including which direction it moved
+ * in.
+ * navigateMaze function: This function combines all the functions together with a few other methods to help the bot
+ * escape the maze. While the bot isnt at the end checkpoint it turns right to check if theres a wall and depending on
+ * the result it will either move, turn left and move forward or keep turning left until its front is clear. And lastly
+ * prints the bots movement data results.
  * @author Leo Ismail
  * @author Dalton Langely
  */
 class MazeBot extends RobotSE
 {
-    // TODO: Instance Variables will be declared and initialized here
-    // one each for totalMoves, movesWest, movesEast, movesSouth, and MovesNorth
     int totalMoves;
     int movesWest;
     int movesEast;
@@ -23,15 +33,11 @@ class MazeBot extends RobotSE
         super(theCity, str, ave, dir, numThings);
     }
 
-    /*
-     * TODO: Override here the move method and make it count everything it is
-     * supposed to by adding to the instance variables as well as moving the
-     * MazeBot. This overridden move method must be called by the NavigateMaze
-     * method or by some method(s) called from NavigateMaze.
-     */
     public void moveBot()
     {
-        this.botPutThing();
+        if(!this.canPickThing()){
+            this.botPutThing();
+        }
         this.move();
         totalMoves++;
         if (this.getDirection() == Direction.EAST)
@@ -49,8 +55,6 @@ class MazeBot extends RobotSE
         }
 
     }
-
-    // TODO: You must override the putThing method here.
     public void botPutThing()
     {
         if (this.countThingsInBackpack() != 0)
@@ -59,8 +63,7 @@ class MazeBot extends RobotSE
         }
     }
 
-    public void printEverything()// Or printTotalNumberOfSpacesMoved(),
-    // whichever you decide
+    public void printEverything()
     {
         System.out.println("Total number of spaces moved: " + totalMoves);
         System.out.println("Total number of westward movements: " + movesWest);
@@ -70,19 +73,11 @@ class MazeBot extends RobotSE
         System.out.println("Hooray! don has solved the maze.");
     }
 
-    // The isAtEndSpot() method below is what's called a 'helper method' It
-    // exists just to make another command (in this case, NavigateMaze) easier
-    // to understand. It does this by replacing some code that otherwise would
-    // be in NavigateMaze with it's name, and doing that work here, instead.
-    // Declaring it "private" means that only the MazeBot is allowed to call
-    // upon it.
     private boolean isAtEndSpot()
     {
         return getAvenue() == 9 && getStreet() == 10;
     }
 
-    // THIS IS THE METHOD WE WILL USE TO DO EVERYTHING (IT WILL CALL
-    // OTHER METHODS LIKE isAtEndSpot, ETC)
     public void navigateMaze()
     {
         while (!isAtEndSpot())
