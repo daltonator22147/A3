@@ -62,11 +62,12 @@ class MazeBot extends RobotSE
     public void printEverything()// Or printTotalNumberOfSpacesMoved(),
     // whichever you decide
     {
-        System.out.println("Total moves: "+totalMoves);
-        System.out.println("Moved west: "+movesWest);
-        System.out.println("Moved east: "+movesEast);
-        System.out.println("Moved north: "+movesNorth);
-        System.out.println("Moved south: "+movesSouth);
+        System.out.println("Total number of spaces moved: "+totalMoves);
+        System.out.println("Total number of westward movements: "+movesWest);
+        System.out.println("Total number of eastward movements: "+movesEast);
+        System.out.println("Total number of northward movements: "+movesNorth);
+        System.out.println("Total number of southward movements: "+movesSouth);
+        System.out.println("Hooray! don has solved the maze.");
     }
 
     // The isAtEndSpot() method below is what's called a 'helper method' It
@@ -102,6 +103,8 @@ class MazeBot extends RobotSE
 
 
         }
+        
+        this.printEverything();
     }
 }
 
@@ -236,5 +239,6 @@ public class Maze extends Object
         // called. NO NEED TO TOUCH AT ALL
         //don.printEverything();
         don.navigateMaze();
+        don.printEverything();
     }
 }
