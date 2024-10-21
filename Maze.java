@@ -50,7 +50,7 @@ class MazeBot extends RobotSE
     }
 
     // TODO: You must override the putThing method here.
-    public void putThing(){
+    public void botPutThing(){
         if(this.countThingsInBackpack()!=0){
             this.putThing();
         }
@@ -87,7 +87,8 @@ class MazeBot extends RobotSE
         {
             // TODO: The robot will navigate the maze until it reaches the end spot.
             // What will you have the robot do at each step?
-
+            this.moveBot();
+            this.botPutThing();
         }
 
         // TODO: After completing Maze, print total number of spaces moved and how
